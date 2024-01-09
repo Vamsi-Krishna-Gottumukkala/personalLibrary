@@ -26,7 +26,6 @@
 
 table {
   width: 98%;
-  /* height: 4rem; */
   margin: 1rem;
   border: 3px solid black;
   background-color: #393e46;
@@ -42,7 +41,7 @@ th {
 td {
   height: 3rem;
   color: #ffffff;
-  padding-left: 2rem;
+  padding-left: 1rem;
 }
 
 .data {

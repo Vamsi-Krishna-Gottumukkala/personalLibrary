@@ -49,6 +49,17 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get('/delete-books',(req,res)=>{
+  var sql = "DELETE FROM home where name=?";
+
+  var name = req.query.name;
+
+  con.query(sql, [name], (err, result) => {
+    if (err) throw err;
+    res.redirect('/')
+  });
+})
+
 app.listen(7000, () => {
   console.log("Server is running on port 7000");
 });
