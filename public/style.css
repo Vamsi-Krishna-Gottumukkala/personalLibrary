@@ -58,3 +58,30 @@ td {
   justify-content: space-between;
   align-items: center;
 }
+
+.frm{
+    margin-left: 1rem;
+}
+
+.det{
+    border-radius: 2rem;
+    padding: .5rem;
+    border: 1.5px solid black;
+    margin: .3rem;
+    width: 30rem;
+    padding-left: .7rem;
+    color: black;
+}
+
+.sub{
+    text-transform: uppercase;
+    background-color: #222831;
+    color: #00adb5;
+    font-size: medium;
+    border-radius: 2rem;
+    padding: .5rem;
+    border: 1.5px solid black;
+    margin: .3rem;
+    text-transform: uppercase;
+    width: 10rem;
+}

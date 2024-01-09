@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Personal Library</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="links" href="/index.ejs">ALL</a>
+      <a class="links" href="##">GROUPED BY STATUS</a>
+      <a class="links" href="##">BOOKS</a>
+    </nav>
+    <form action="/search" class="frm">
+        <input type="search" name="name" placeholder="Search Book Name" class="det">
+        <input type="search" name="author" placeholder="Search Author Name" class="det">
+        <input type="submit" value="Search" class="sub">
+    </form>
+    <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Score</th>
+        <th>Author</th>
+        <th>Completed At</th>
+      </tr>
+
+      <% if(books.length>0) { %> 
+        
+        <% for(var i=0;i<books.length;i++) { %>
+
+            <tr class="data">
+                <td class="row"><%- books[i].Name %></td>
+                <td class="row"><%- books[i].Type %></td>
+                <td class="row"><%- books[i].Status %></td>
+                <td class="row"><%- books[i].Score %></td>
+                <td class="row"><%- books[i].Author %></td>
+                <td class="row"><%- books[i].Completed %></td>
+            </tr>
+
+        <% } %>
+      
+        <% } else { %> 
+            <tr>
+                <td>
+                    DATA NOT FOUND
+                </td>
+            </tr>
+      <% } %>
+    </table>
+  </body>
+</html>

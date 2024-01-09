@@ -88,6 +88,27 @@ app.post('/update-books', (req, res) => {
   });
 });
 
+app.get('/search-books',(req,res)=>{
+  var sql = "SELECT * FROM home";
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.render(__dirname + '/search-books', { books: result });
+  });
+})
+
+app.get('/search',(req,res)=>{
+
+  var name = req.query.name;
+  var author = req.query.author;
+
+    var sql = "SELECT * FROM home WHERE name LIKE '%"+name+"%'AND author LIKE '%"+author+"%'"
+
+    con.query(sql,(err, result)=>{
+      if(err) throw error
+      res.render(__dirname+"/search-books",{books:result})
+    })
+})
+
 app.listen(7000, () => {
   console.log("Server is running on port 7000");
 });
