@@ -60,6 +60,35 @@ app.get('/delete-books',(req,res)=>{
   });
 })
 
+app.get('/update-books',(req,res)=>{
+  var sql = "SELECT * FROM home where name=?";
+
+  var name = req.query.name;
+
+  con.query(sql, [name], (err, result) => {
+    if (err) throw err;
+    res.render(__dirname+"/update-books",{books:result})
+  });
+})
+
+app.post('/update-books',(req,res)=>{
+  var name = req.body.name;
+  var type = req.body.type;
+  var status = req.body.status;
+  var score = req.body.score;
+  var author = req.body.author;
+  var completed = req.body.date;
+
+  var sql = "UPDATE home set name=? type=? status=? score=? author=? completed=? ";
+
+  var name = req.query.name;
+
+  con.query(sql, [name, type, status, score, author, completed], (err, result) => {
+    if (err) throw err;
+    res.redirect('/')
+  });
+})
+
 app.listen(7000, () => {
   console.log("Server is running on port 7000");
 });

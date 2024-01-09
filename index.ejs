@@ -42,7 +42,10 @@
                 <td class="row"><%- books[i].Score %></td>
                 <td class="row"><%- books[i].Author %></td>
                 <td class="row"><%- books[i].Completed %></td>
-                <td><a href="/delete-books?name=<%- books[i].Name %>"><img width="24" height="24" src="https://img.icons8.com/material-sharp/24/filled-trash.png" alt="filled-trash"/></a></td>
+                <td>
+                  <a href="/update-books?name=<%- books[i].Name %>"><img width="24" height="24" src="https://img.icons8.com/ios-glyphs/30/edit--v1.png" alt="edit"/></a>
+                  <a href="/delete-books?name=<%- books[i].Name %>"><img width="24" height="24" src="https://img.icons8.com/material-sharp/24/filled-trash.png" alt="delete"/></a>
+                </td>
             </tr>
 
         <% } %>
