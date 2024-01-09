@@ -71,7 +71,7 @@ app.get('/update-books',(req,res)=>{
   });
 })
 
-app.post('/update-books',(req,res)=>{
+app.post('/update-books', (req, res) => {
   var name = req.body.name;
   var type = req.body.type;
   var status = req.body.status;
@@ -79,15 +79,13 @@ app.post('/update-books',(req,res)=>{
   var author = req.body.author;
   var completed = req.body.date;
 
-  var sql = "UPDATE home set name=? type=? status=? score=? author=? completed=?";
-
-  var name = req.query.name;
+  var sql = "UPDATE home SET name=?, type=?, status=?, score=?, author=?, completed=?";
 
   con.query(sql, [name, type, status, score, author, completed, name], (err, result) => {
     if (err) throw err;
-    res.redirect('/')
+    res.redirect('/');
   });
-})
+});
 
 app.listen(7000, () => {
   console.log("Server is running on port 7000");
