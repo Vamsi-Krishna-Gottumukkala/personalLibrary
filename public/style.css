@@ -91,3 +91,7 @@ td {
     justify-content: center;
     align-items: center;
 }
+
+.margin-2{
+    margin: 2rem;
+}
