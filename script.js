@@ -78,10 +78,11 @@ app.post('/update-books', (req, res) => {
   var score = req.body.score;
   var author = req.body.author;
   var completed = req.body.date;
+  var bid = req.body.bid;
 
-  var sql = "UPDATE home SET name=?, type=?, status=?, score=?, author=?, completed=?";
+  var sql = "UPDATE home SET name=?, type=?, status=?, score=?, author=?, completed=? WHERE bid=?" ;
 
-  con.query(sql, [name, type, status, score, author, completed, name], (err, result) => {
+  con.query(sql, [name, type, status, score, author, completed, bid], (err, result) => {
     if (err) throw err;
     res.redirect('/');
   });
