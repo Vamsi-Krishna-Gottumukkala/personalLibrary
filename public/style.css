@@ -85,3 +85,9 @@ td {
     text-transform: uppercase;
     width: 10rem;
 }
+
+.search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

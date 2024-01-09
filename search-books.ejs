@@ -10,15 +10,18 @@
   </head>
   <body>
     <nav class="nav">
-      <a class="links" href="/index.ejs">ALL</a>
+      <a class="links" href="/">ALL</a>
       <a class="links" href="##">GROUPED BY STATUS</a>
       <a class="links" href="##">BOOKS</a>
     </nav>
-    <form action="/search" class="frm">
-        <input type="search" name="name" placeholder="Search Book Name" class="det">
-        <input type="search" name="author" placeholder="Search Author Name" class="det">
-        <input type="submit" value="Search" class="sub">
-    </form>
+    <div class="search">
+        <form action="/search" class="frm">
+            <input type="search" name="name" placeholder="Search Book Name" class="det">
+            <input type="search" name="author" placeholder="Search Author Name" class="det">
+            <input type="submit" value="Search" class="sub">
+        </form>
+        <a href="/"><img width="100" height="100" src="https://img.icons8.com/clouds/100/multiply.png" alt="close"/></a>
+    </div>
     <table border="1">
       <tr>
         <th>Name</th>
