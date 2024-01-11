@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>GROUPED BY STATUS</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="links" href="/">ALL</a>
+      <a class="selected" href="/status">GROUPED BY STATUS</a>
+      <a class="links" href="##">BOOKS</a>
+    </nav>
+    <div class="all">
+        <div class="col not">
+            <h3>NOT STARTED</h3>
+            <% if(books.length>0) {%>
+                <% for(var i=0;i<books.length;i++) { %>
+                    <% if(books[i].status=="Not Started") {%>
+                        <div class="statbx">
+                            <h4>Name :</h4>
+                            <%- books[i].name %>
+                            <h4>Author :</h4>
+                            <%- books[i].author %>
+                        </div>
+                    <% } %>
+                <% } %>                
+            <% } else { %> 
+                <h1 class="err">Data not found</h1>
+            <% } %>
+        </div>
+        <div class="col inprog">
+            <h3>IN PROGRESS</h3>
+            <% if(books.length>0) {%>
+                <% for(var i=0;i<books.length;i++) { %>
+                    <% if(books[i].status=="In Progress") {%>
+                        <div class="statbx">
+                            <h4>Name :</h4>
+                            <%- books[i].name %>
+                            <h4>Author :</h4>
+                            <%- books[i].author %>
+                        </div>
+                    <% } %>
+                <% } %>                
+            <% } else { %> 
+                <h1 class="err">Data not found</h1>
+            <% } %>
+        </div>
+        <div class="col done">
+            <h3>DONE</h3>
+            <% if(books.length>0) {%>
+                <% for(var i=0;i<books.length;i++) { %>
+                    <% if(books[i].status=="Done") {%>
+                        <div class="statbx">
+                            <h4>Name :</h4>
+                            <%- books[i].name %>
+                            <h4>Author :</h4>
+                            <%- books[i].author %>
+                        </div>
+                    <% } %>
+                <% } %>                
+            <% } else { %> 
+                <h1 class="err">Data not found</h1>
+            <% } %>
+        </div>
+    </div>
+    <!-- <div class="hd">
+      <h1 class="pl">PERSONAL LIBRARY</h1>
+      <div class="search">
+        <a href="/search-books">
+          <img width="100" height="100" src="https://img.icons8.com/clouds/100/search.png" alt="search"/>
+        </a>
+        <a href="/new">
+          <img width="100" height="100" src="https://img.icons8.com/clouds/100/add.png" alt="add"/>
+        </a>
+      </div>
+    </div> -->
+    <!-- <table border="1">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Score</th>
+        <th>Author</th>
+        <th>Completed At</th>
+        <th>Actions</th>
+      </tr>
+
+      <% if(books.length>0) { %> 
+        
+        <% for(var i=0;i<books.length;i++) { %>
+
+            <tr class="data">
+                <td class="row"><%- books[i].Name %></td>
+                <td class="row"><%- books[i].Type %></td>
+                <td class="row"><%- books[i].Status %></td>
+                <td class="row"><%- books[i].Score %></td>
+                <td class="row"><%- books[i].Author %></td>
+                <td class="row"><%- books[i].Completed %></td>
+                <td>
+                  <a href="/update-books?name=<%- books[i].Name %>"><img width="24" height="24" src="https://img.icons8.com/ios-glyphs/30/edit--v1.png" alt="edit"/></a>
+                  <a href="/delete-books?name=<%- books[i].Name %>"><img width="24" height="24" src="https://img.icons8.com/material-sharp/24/filled-trash.png" alt="delete"/></a>
+                </td>
+            </tr>
+
+        <% } %>
+      
+        <% } else { %> 
+            <h1 class="err">Data not found</h1>
+      <% } %>
+    </table> -->
+  </body>
+</html>

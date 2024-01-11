@@ -49,6 +49,14 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/status", (req, res) => {
+  var sql = "SELECT name, status, author FROM home";
+  con.query(sql, (err, result) => {
+    if (err) throw err;
+    res.render(__dirname + '/status', { books: result });
+  });
+});
+
 app.get('/delete-books',(req,res)=>{
   var sql = "DELETE FROM home where name=?";
 
