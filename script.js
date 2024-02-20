@@ -1,5 +1,6 @@
 var con = require("./connection");
 var exp = require("express");
+const session = require('express-session');
 var app = exp();
 const path = require("path");
 const PORT = process.env.PORT || 7000
@@ -11,6 +12,118 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 app.use(exp.static(path.join(__dirname, "public")));
+
+app.use(session({
+  secret: 'qwerty1234!@#$', 
+  resave: true,
+  saveUninitialized: true,
+}));
+
+const isAuthenticated = (req, res, next) => {
+  if (req.session && req.session.user) {
+    return next();
+  } else {
+    res.redirect('/login');
+  }
+};
+
+app.use(['/new', '/status', '/delete-books', '/update-books', '/search-books', '/search'], isAuthenticated);
+
+app.get('/login', (req, res) => {
+  res.render(__dirname + '/login');
+});
+
+app.post('/login', async (request, response, next) => {
+
+  var user_email_address = request.body.user_email_address;
+
+  var user_password = request.body.user_password;
+
+  if(user_email_address && user_password)
+  {
+      query = `
+      SELECT * FROM user_login 
+      WHERE user_email = "${user_email_address}"
+      `;
+
+      con.query(query, (error, data) => {
+
+          if(data.length > 0)
+          {
+              for(var count = 0; count < data.length; count++)
+              {
+                  if(data[count].user_password == user_password)
+                  {
+                    request.session.user = {
+                      user_id: data[count].user_id,
+                      user_email: data[count].user_email
+                    };
+
+                      response.redirect("/");
+
+                      return;
+                  }
+  
+                }
+                response.send('Incorrect Password');
+          }
+          else
+          {
+              response.send('Incorrect Email Address');
+          }
+          response.end();
+      });
+  }
+  else
+  {
+      response.send('Please Enter Email Address and Password Details');
+  }
+
+});
+
+app.get('/logout', function(request, response, next){
+
+  request.session.destroy();
+
+  response.redirect("/");
+
+});
+
+app.get('/register', (req, res) => {
+  res.render(__dirname + '/register', { errorMessage: null });
+});
+
+app.post('/register', (req, res) => {
+  const email = req.body.user_email_address;
+  const password = req.body.user_password;
+
+  if (!email || !password) {
+    return res.render(__dirname + '/register', { errorMessage: 'Please fill out all fields.' });
+  }
+
+  // Check if the email is already registered
+  con.query('SELECT * FROM user_login WHERE user_email = ?', [email], (error, results) => {
+    if (error) {
+      console.error(error);
+      return res.status(500).send('Internal Server Error');
+    }
+
+    if (results.length > 0) {
+      return res.render(__dirname + '/register', { errorMessage: 'Email is already registered.' });
+    }
+
+    // Insert the new user into the database
+    con.query('INSERT INTO user_login (user_email, user_password) VALUES (?, ?)', [email, password], (error) => {
+      if (error) {
+        console.error(error);
+        return res.status(500).send('Internal Server Error');
+      }
+
+      // Redirect to a success page or login page
+      res.redirect('/login');
+    });
+  });
+});
 
 con.connect((err) => {
   if (err) throw err;
@@ -42,7 +155,7 @@ app.post("/new", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
+app.get("/", isAuthenticated, (req, res) => {
   var sql = "SELECT * FROM home";
   con.query(sql, (err, result) => {
     if (err) throw err;
@@ -119,5 +232,5 @@ app.get('/search',(req,res)=>{
 })
 
 app.listen(PORT, () => {
-  console.log("Server is running on port 7000");
+  console.log(`Server is running on port ${PORT}`);
 });

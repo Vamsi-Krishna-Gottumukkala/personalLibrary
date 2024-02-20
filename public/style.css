@@ -5,15 +5,26 @@
   text-decoration: none;
 }
 
+nav{
+  background-color: #222831;
+  display: flex;
+  justify-content: space-between;
+  height: 6rem;
+  align-items: center;
+}
+
 .nav {
   background-color: #222831;
   color: #ffffff;
   display: flex;
-  justify-content: space-evenly;
   height: 4rem;
   align-items: center;
   font-size: large;
   font-weight: 800;
+}
+
+.nav a{
+  margin-left: 30px;
 }
 
 .links{
@@ -108,7 +119,7 @@ td {
   align-items: center;
   width: 33.3%;
   /* background-color: bisque; */
-  height: 100vh;
+  height: 89.9vh;
   border-right: 3px solid black;
 }
 
